@@ -1,0 +1,28 @@
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.screen {
+    height: 80px;
+    width: 400px;
+    border: 5px solid black;
+}
+
+.lower {
+    height: 80px;
+    width: 400px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    text-decoration: none;
+    height: 32%;
+    width: 32%;
+}
