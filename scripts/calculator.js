@@ -100,20 +100,35 @@ function display(Buttons) {
                     }
                 }
                 catch(e) {
-                    if(e == "Division by zero is not allowed.") {
                         Buttons.screen.innerHTML = "****Erreur*****";
+                        clearEtat();
                     }
                 }
             }
-        });
+        );
+    });
+
+    // Gestion DEL
+    const del = document.querySelector("#del");
+    del.addEventListener("click", () => {
+        if (Buttons.screen.innerHTML.includes("Erreur")) {
+            Buttons.screen.innerHTML = "";
+            clearEtat();
+        }
+
+        Buttons.screen.innerHTML = Buttons.screen.innerHTML.slice(0, -1);
     });
 
     // Gestion bouton équal
     const equal = document.querySelector("#equal");
     equal.addEventListener("click", () => {
-        if(Etat.operand != null && Buttons.screen.innerHTML.length >=1) {
-            console.log("on est là");
-            Buttons.screen.innerHTML = operate(Etat.currValue, parseFloat(Buttons.screen.innerHTML), Etat.operand);
+        try {
+            if(Etat.operand != null && Buttons.screen.innerHTML.length >=1) {
+                Buttons.screen.innerHTML = operate(Etat.currValue, parseFloat(Buttons.screen.innerHTML), Etat.operand);
+                clearEtat();
+            }
+        } catch(e) {
+            Buttons.screen.innerHTML = "****Erreur*****";
             clearEtat();
         }
     });
