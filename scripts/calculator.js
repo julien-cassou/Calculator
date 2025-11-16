@@ -22,7 +22,8 @@ function operate(a, b, op) {
         case "+" : return add(a,b);
         case "-" : return subtract(a, b);
         case "x" : return multiply(a, b);
-        case "/" : return divide(a, b);
+        case "÷" : return divide(a, b);
+        case "%" : return a % b;
         default : throw new Error("Invalid operator");
     }
 }
@@ -30,54 +31,101 @@ function operate(a, b, op) {
 let Buttons = {
     screen : document.querySelector(".screen"),
 
-    neuf : document.querySelector("#nine"),
-    eight : document.querySelector("#eight"),
-    seven : document.querySelector("#seven"),
-    six : document.querySelector("#six"),
-    five : document.querySelector("#five"),
-    four : document.querySelector("#four"),
-    three : document.querySelector("#three"),
-    two : document.querySelector("#two"),
-    one : document.querySelector("#one"),
-    zero : document.querySelector("#zero"),
+    digitButtons : document.querySelectorAll('[data-type="digit"]'),
+    opButtons : document.querySelectorAll('[data-type="operator"]'),
 
     neg : document.querySelector("#neg"),
 
 }
 
-function display(Buttons) {
-    let screen_text = Buttons.screen.innerHTML;
+let Etat = {
+    operand : null,
+    currValue : null,
+    waitingForSecondOp : false,
+}
 
-    Buttons.neuf.addEventListener("click", () => {
-        Buttons.screen.innerHTML += "9";
+function clearEtat() {
+    Etat = {
+        operand : null,
+        currValue : null,
+        waitingForSecondOp : false,
+    }
+}
+
+function write(digit) {
+    if(Buttons.screen.innerHTML.length >= 14) {
+        return;
+    }
+    else {
+        Buttons.screen.innerHTML += digit;
+    }
+}
+
+function display(Buttons) {
+    // Gestion d'événement des boutons digits
+    Buttons.digitButtons.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const digit = e.target.textContent;
+            write(digit);
+        });
     })
-    Buttons.eight.addEventListener("click", () => {
-        Buttons.screen.innerHTML += "8";
-    })
-    Buttons.seven.addEventListener("click", () => {
-        Buttons.screen.innerHTML += "7";
-    })
-    Buttons.six.addEventListener("click", () => {
-        Buttons.screen.innerHTML += "6";
-    })
-    Buttons.five.addEventListener("click", () => {
-        Buttons.screen.innerHTML += "5";
-    })
-    Buttons.four.addEventListener("click", () => {
-        Buttons.screen.innerHTML += "4";
-    })
-    Buttons.three.addEventListener("click", () => {
-        Buttons.screen.innerHTML += "3";
-    })
-    Buttons.two.addEventListener("click", () => {
-        Buttons.screen.innerHTML += "2";
-    })
-    Buttons.one.addEventListener("click", () => {
-        Buttons.screen.innerHTML += "1";
-    })
-    Buttons.zero.addEventListener("click", () => {
-        Buttons.screen.innerHTML += "0";
-    })  
+
+    // Gestion d'événement des boutons operators
+    Buttons.opButtons.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const op = e.target.textContent;
+
+            if (btn.id == "sqrt") {
+                const num = Math.sqrt(parseFloat(Buttons.screen.innerHTML));
+                if (isNaN(num)) Buttons.screen.innerHTML = "****Erreur*****";   
+                else Buttons.screen.innerHTML = num.toFixed(8);    
+            } 
+            else {
+                try {
+
+                    if(Etat.waitingForSecondOp == true) {
+                        if(Buttons.screen.innerHTML.length >= 1) {
+                            Etat.currValue = operate(Etat.currValue, parseFloat(Buttons.screen.innerHTML), Etat.operand);
+                            Etat.operand = op;
+                            Buttons.screen.innerHTML = "";
+                        }
+                    }
+                    else {
+                        if(Buttons.screen.innerHTML.length >= 1) {
+                            Etat.currValue = parseFloat(Buttons.screen.innerHTML);
+                            Etat.operand = op;
+                            Etat.waitingForSecondOp = true;
+                            Buttons.screen.innerHTML = "";
+                        }
+                    }
+                }
+                catch(e) {
+                    if(e == "Division by zero is not allowed.") {
+                        Buttons.screen.innerHTML = "****Erreur*****";
+                    }
+                }
+            }
+        });
+    });
+
+    // Gestion bouton équal
+    const equal = document.querySelector("#equal");
+    equal.addEventListener("click", () => {
+        if(Etat.operand != null && Buttons.screen.innerHTML.length >=1) {
+            console.log("on est là");
+            Buttons.screen.innerHTML = operate(Etat.currValue, parseFloat(Buttons.screen.innerHTML), Etat.operand);
+            clearEtat();
+        }
+    });
+
+    // Gestion bouton AC
+    const clear = document.querySelector("#clear");
+    clear.addEventListener("click", () => {
+        clearEtat();
+        Buttons.screen.innerHTML = "";
+    });
+
+
 }
 
 display(Buttons);
