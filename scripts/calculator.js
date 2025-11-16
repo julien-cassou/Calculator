@@ -47,4 +47,37 @@ let Buttons = {
 
 function display(Buttons) {
     let screen_text = Buttons.screen.innerHTML;
+
+    Buttons.neuf.addEventListener("click", () => {
+        Buttons.screen.innerHTML += "9";
+    })
+    Buttons.eight.addEventListener("click", () => {
+        Buttons.screen.innerHTML += "8";
+    })
+    Buttons.seven.addEventListener("click", () => {
+        Buttons.screen.innerHTML += "7";
+    })
+    Buttons.six.addEventListener("click", () => {
+        Buttons.screen.innerHTML += "6";
+    })
+    Buttons.five.addEventListener("click", () => {
+        Buttons.screen.innerHTML += "5";
+    })
+    Buttons.four.addEventListener("click", () => {
+        Buttons.screen.innerHTML += "4";
+    })
+    Buttons.three.addEventListener("click", () => {
+        Buttons.screen.innerHTML += "3";
+    })
+    Buttons.two.addEventListener("click", () => {
+        Buttons.screen.innerHTML += "2";
+    })
+    Buttons.one.addEventListener("click", () => {
+        Buttons.screen.innerHTML += "1";
+    })
+    Buttons.zero.addEventListener("click", () => {
+        Buttons.screen.innerHTML += "0";
+    })  
 }
+
+display(Buttons);
