@@ -1,28 +1,139 @@
-body {
-    height: 100%;
-    width: 100%;
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calc {
+    width: 25rem;
+    max-width: 60vw;
+    height: 30rem;
+    max-height: 80vh;
+
+    padding: 2.3rem 1.5rem 0.5rem 1.5rem;
+    border: 6px solid rgb(212, 175, 55);
+    border-radius: 1rem;
+    background-color: #6A057F;
 }
 
 .screen {
-    height: 80px;
-    width: 400px;
-    border: 5px solid black;
+    background-color: rgb(212, 175, 55);
+    width: 100%;
+    height: 4rem;
+
+    font-size: 34px;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 600;
+    border: 1px solid transparent;
+    border-radius: 0.3rem;
+    box-shadow: inset -2px 2px;
+    padding: 0.8rem 1.8rem;
+    box-sizing: border-box;
 }
 
+.bar {
+    margin-top: 1.5rem;
+    margin-left: -1.5rem;
+    margin-bottom: 2rem;
+    background-color: rgb(212, 175, 55);
+    width: 113%;
+    height: 0.2rem;
+}
+
+.font-black {
+    color: #1A1A1A;
+}
+
+.font-clear {
+    color:#F5F5DC;
+}
+
+.but {
+    font-size: 28px;
+    width: 4.4rem;
+    height: 3.5rem;
+    border: 1px solid #1A1A1A;
+    border-radius: 0.3rem;
+    background-color: #940fae;
+}
+
+.black {
+    background-color: #1A1A1A;
+}
+
+.but-long {
+    width: 4.4rem;
+    height: 7rem;
+    border: 1px solid #1A1A1A;
+    border-radius: 0.3rem;
+}
+
+#equal {
+    font-size: 35px;
+    background-color: #F5F5DC;
+}
+
+#plus {
+    font-size: 35px;
+}
+
+#point {
+    font-size: 40px;
+    color: #D4AF37;
+    padding-top: 0.8rem;
+    box-sizing: border-box;
+}
+
+.right > .but, #plus  {
+    background-color: #006B3E;
+} 
+
 .lower {
-    height: 80px;
-    width: 400px;
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+}
+
+.left {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 60%;
+    gap: 5px;
 }
 
 .right {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 40%;
+    gap: 5px;
 }
 
-button {
-    text-decoration: none;
-    height: 32%;
-    width: 32%;
+.BossLady {
+    margin-top: 2rem;
+    margin-left: 7rem;
+    background-color:#F5F5DC;
+    height: 20px;
+    width: 35%;
+    border: 1px solid transparent;
+    border-radius: 0.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    box-sizing: border-box;
+}
+
+.visse {
+    width: 0.5rem;
+    height: 0.5rem;
+  
+    background: radial-gradient(
+        circle at 30% 30%, 
+        #f0e1aF,
+        #D4AF37
+    );
+
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    margin-top: 0.2rem;
 }
