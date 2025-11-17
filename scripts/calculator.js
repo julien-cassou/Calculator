@@ -140,7 +140,25 @@ function display(Buttons) {
         Buttons.screen.innerHTML = "";
     });
 
+    const neg = document.querySelector("#neg");
+    neg.addEventListener("click", () => {
+        if(Buttons.screen.innerHTML.length > 0) {
+            if (Buttons.screen.innerHTML.charAt(0) == "-") {
+                Buttons.screen.innerHTML = Buttons.screen.innerHTML.slice(1);
+            }
+            else {
+                Buttons.screen.innerHTML = "-" + Buttons.screen.innerHTML.slice();
+            }
+        }
+    });
 
+    const point = document.querySelector("#point");
+    point.addEventListener("click", () => {
+        if(Buttons.screen.innerHTML.length > 0) {
+            Buttons.screen.innerHTML += ".";
+        }
+    });
 }
+
 
 display(Buttons);
