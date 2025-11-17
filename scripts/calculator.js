@@ -154,8 +154,14 @@ function display(Buttons) {
 
     const point = document.querySelector("#point");
     point.addEventListener("click", () => {
-        if(Buttons.screen.innerHTML.length > 0) {
-            Buttons.screen.innerHTML += ".";
+        const length = Buttons.screen.innerHTML.length
+        if(length > 0) {
+            const lastChar = Buttons.screen.innerHTML.charAt(length - 1);
+            const num = parseFloat(Buttons.screen.innerHTML);
+            console.log(lastChar);
+            if (num % 1 == 0 && lastChar != ".") {
+                Buttons.screen.innerHTML += ".";
+            }
         }
     });
 }
